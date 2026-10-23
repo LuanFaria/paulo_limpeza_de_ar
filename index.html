@@ -259,6 +259,43 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
 @media (max-width:700px){.vig{background:linear-gradient(180deg,rgba(244,249,253,0) 48%,rgba(244,249,253,.7) 100%)}}
 .faq a{color:var(--blue-deep);font-weight:600}.faq p{max-width:70ch}
 .hs p,.hs .micro{color:var(--fg);opacity:.88}
+
+/* ===== hero responsivo =====
+   Desktop: foto em tela cheia com o texto por cima (igual a antes).
+   Celular / tablet em pé: foto em cima, texto embaixo em fundo limpo, sem sobreposição. */
+.hmedia{position:absolute;inset:0}
+.fab{transition:opacity .3s,transform .3s}
+.fab.off{opacity:0;pointer-events:none;transform:scale(.8);animation:none}
+@media (max-width:700px),(orientation:portrait) and (max-width:1024px),(orientation:landscape) and (max-height:520px){
+  .hero2 .hstick{display:flex;flex-direction:column;background:#f4f9fd}
+  .hmedia{position:relative;inset:auto;flex:1 1 0;min-height:30svh;overflow:hidden}
+  .vig{background:linear-gradient(180deg,rgba(244,249,253,0) 58%,#f4f9fd 100%)}
+  .shint{display:block;left:50%;right:auto;bottom:10px;font-size:11px;letter-spacing:.14em}
+  .copy{position:relative;left:auto;right:auto;bottom:auto;flex:none;padding:14px var(--gutter) max(24px,env(safe-area-inset-bottom,0px))}
+  .hs{max-width:100%}
+  .hs h1,.hs h2{font-size:clamp(31px,9vw,48px);line-height:1.02;text-shadow:none}
+  .hs p{margin-top:12px;font-size:clamp(16px,4.3vw,20px);line-height:1.4;max-width:36ch;text-shadow:none}
+  .hs .cta{margin-top:18px;gap:8px}
+  .hs .cta .btn{width:100%}
+  .btn-cta{min-height:56px;padding:0 24px;font-size:16px}
+  .hs .cta .btn-line{min-height:48px}
+  .hs .micro{margin-top:10px;font-size:13px}
+}
+@media (max-height:720px) and (max-width:700px){ .hs .micro{display:none} .hs p{margin-top:10px} .hs .cta{margin-top:14px} }
+@media (orientation:landscape) and (max-height:520px){
+  .hero2 .hstick{flex-direction:row;align-items:stretch}
+  .hmedia{flex:1.1 1 0;min-height:0}
+  .vig{background:linear-gradient(90deg,rgba(244,249,253,0) 62%,#f4f9fd 100%)}
+  .copy{flex:1 1 0;align-self:center;padding:8px var(--gutter) 8px 8px}
+  .hs h1,.hs h2{font-size:clamp(24px,4.4vw,38px)}
+  .hs p{font-size:15px;margin-top:8px}
+  .hs .cta{margin-top:12px}
+  .hs .cta .btn{width:auto}
+  .btn-cta{min-height:48px;font-size:15px;padding:0 22px}
+  .hs .cta .btn-line{min-height:44px}
+  .hs .micro{display:none}
+  .shint{display:none}
+}
 </style>
 
 <header class="hdr">
@@ -272,17 +309,19 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
 <main id="topo">
   <section class="hero2" id="hero" aria-label="Início">
     <div class="hstick" id="hstick">
-      <img class="bg" src="interior.jpg" width="1687" height="876" alt="Interior de um carro com painel escuro e saídas de ar">
-      <div class="dirt" id="dirt" aria-hidden="true"></div>
-      <div class="cleanl" id="cleanl" aria-hidden="true"></div>
-      <canvas id="fx" aria-hidden="true"></canvas>
-      <div class="vig" aria-hidden="true"></div>
+      <div class="hmedia" id="hmedia">
+        <img class="bg" id="bg" src="interior.jpg" width="1687" height="876" alt="Interior de um carro com painel escuro e saídas de ar">
+        <div class="dirt" id="dirt" aria-hidden="true"></div>
+        <div class="cleanl" id="cleanl" aria-hidden="true"></div>
+        <canvas id="fx" aria-hidden="true"></canvas>
+        <div class="vig" aria-hidden="true"></div>
+        <div class="shint" id="shint" aria-hidden="true">Role a página</div>
+      </div>
       <div class="copy">
         <div class="hs" id="hs0"><h1 id="h1">Você respira o que está dentro dele.</h1><p>Todo dia, na ida e na volta. Mofo e poeira do ar-condicionado vão direto para o seu rosto.</p><div class="cta"><a class="btn btn-cta" href="https://wa.me/5516997877281?text=Ol%C3%A1%20Paulo%2C%20quero%20limpar%20o%20ar-condicionado%20do%20meu%20carro." target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5.05-1.6A9.9 9.9 0 1 0 12.04 2zm5.8 14.1c-.25.7-1.45 1.35-2 1.4-.52.06-1.18.08-1.9-.12a17 17 0 0 1-1.7-.63c-3-1.3-4.95-4.3-5.1-4.5-.15-.2-1.2-1.6-1.2-3s.75-2.1 1-2.4c.25-.3.55-.37.74-.37h.55c.18 0 .42-.07.65.5.25.6.84 2.06.9 2.2.08.15.12.33.02.52-.1.2-.15.32-.3.5l-.45.5c-.15.15-.3.3-.13.6.17.3.75 1.25 1.62 2.02 1.1 1 2.05 1.3 2.35 1.45.3.15.47.12.65-.07.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.07.12.07.72-.18 1.4z"/></svg>Quero ar limpo no meu carro</a></div></div>
         <div class="hs" id="hs1"><h2>O cheiro não vem do filtro.</h2><p>Ele nasce no evaporador e nos dutos, onde ninguém limpa. Só trocar o filtro não resolve.</p><div class="cta"><a class="btn btn-cta" href="https://wa.me/5516997877281?text=Ol%C3%A1%20Paulo%2C%20quero%20limpar%20o%20ar-condicionado%20do%20meu%20carro." target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5.05-1.6A9.9 9.9 0 1 0 12.04 2zm5.8 14.1c-.25.7-1.45 1.35-2 1.4-.52.06-1.18.08-1.9-.12a17 17 0 0 1-1.7-.63c-3-1.3-4.95-4.3-5.1-4.5-.15-.2-1.2-1.6-1.2-3s.75-2.1 1-2.4c.25-.3.55-.37.74-.37h.55c.18 0 .42-.07.65.5.25.6.84 2.06.9 2.2.08.15.12.33.02.52-.1.2-.15.32-.3.5l-.45.5c-.15.15-.3.3-.13.6.17.3.75 1.25 1.62 2.02 1.1 1 2.05 1.3 2.35 1.45.3.15.47.12.65-.07.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.07.12.07.72-.18 1.4z"/></svg>Resolver o cheiro agora</a></div></div>
         <div class="hs" id="hs2"><h2>Aí o ar volta a ser só ar.</h2><p>Ar gelado, sem cheiro de mofo e sem poeira no seu rosto. Fale com o Paulo e agende hoje.</p><div class="cta"><a class="btn btn-cta" href="https://wa.me/5516997877281?text=Ol%C3%A1%20Paulo%2C%20quero%20limpar%20o%20ar-condicionado%20do%20meu%20carro." target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5.05-1.6A9.9 9.9 0 1 0 12.04 2zm5.8 14.1c-.25.7-1.45 1.35-2 1.4-.52.06-1.18.08-1.9-.12a17 17 0 0 1-1.7-.63c-3-1.3-4.95-4.3-5.1-4.5-.15-.2-1.2-1.6-1.2-3s.75-2.1 1-2.4c.25-.3.55-.37.74-.37h.55c.18 0 .42-.07.65.5.25.6.84 2.06.9 2.2.08.15.12.33.02.52-.1.2-.15.32-.3.5l-.45.5c-.15.15-.3.3-.13.6.17.3.75 1.25 1.62 2.02 1.1 1 2.05 1.3 2.35 1.45.3.15.47.12.65-.07.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.07.12.07.72-.18 1.4z"/></svg>Agendar no WhatsApp</a><a class="btn btn-line" href="#servicos">Ver serviços</a></div><p class="micro">Mande o modelo e o ano do carro e receba o valor direto pelo WhatsApp.</p></div>
       </div>
-      <div class="shint" id="shint" aria-hidden="true">Role a página</div>
     </div>
   </section>
 
@@ -407,12 +446,21 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
   var VENTS = [{ x: 700, y: 324, r: 55, dx: -.2, dy: .85 }, { x: 855, y: 324, r: 55, dx: -.1, dy: .9 }, { x: 1010, y: 324, r: 55, dx: 0, dy: .9 }, { x: 1165, y: 324, r: 55, dx: .1, dy: .9 }, { x: 1310, y: 324, r: 55, dx: .2, dy: .85 }, { x: 1430, y: 324, r: 45, dx: .3, dy: .8 }];
   var W = 0, H = 0, SC = 1, IS = 1, OX = 0, OY = 0, P = 0, t = 0;
   function lerp(a, b, q) { return a + (b - a) * q; }
+  /* layout empilhado (celular / tablet em pé): foto em cima, texto embaixo */
+  var mqStack = matchMedia("(max-width:700px),(orientation:portrait) and (max-width:1024px),(orientation:landscape) and (max-height:520px)");
+  var hmedia = document.getElementById("hmedia"), bgEl = document.getElementById("bg"), fabEl = document.querySelector(".fab");
   function resize() {
-    var d = Math.min(window.devicePixelRatio || 1, 2); W = hst.clientWidth; H = hst.clientHeight;
+    var d = Math.min(window.devicePixelRatio || 1, 2), stacked = mqStack.matches; W = hmedia.clientWidth; H = hmedia.clientHeight;
     cv.width = Math.round(W * d); cv.height = Math.round(H * d); ctx.setTransform(d, 0, 0, d, 0, 0);
-    IS = Math.max(W / IMW, H / IMH); OX = (W - IMW * IS) / 2; OY = (H - IMH * IS) / 2; SC = clamp(IS, .8, 1.7);
+    IS = Math.max(W / IMW, H / IMH);
+    /* no layout empilhado a foto é cortada nas laterais: centraliza na região do painel (tela, ar e saídas) em vez do meio */
+    var fx = .5, vw = W / IS;
+    if (stacked && vw < IMW) fx = clamp((920 - vw / 2) / (IMW - vw), 0, 1);
+    bgEl.style.objectPosition = fx === .5 ? "" : (fx * 100).toFixed(2) + "% 50%";
+    OX = (W - IMW * IS) * fx; OY = (H - IMH * IS) / 2; SC = clamp(IS, stacked ? .5 : .8, 1.7);
   }
   resize(); addEventListener("resize", function () { resize(); apply(); if (reduce) still(); });
+  (mqStack.addEventListener ? mqStack.addEventListener("change", function () { resize(); apply(); }) : mqStack.addListener(function () { resize(); apply(); }));
   function sprite(sz, stops) { var c = document.createElement("canvas"); c.width = c.height = sz; var g = c.getContext("2d"), r = sz / 2, gr = g.createRadialGradient(r, r, 0, r, r, r); stops.forEach(function (q) { gr.addColorStop(q[0], q[1]); }); g.fillStyle = gr; g.fillRect(0, 0, sz, sz); return c; }
   /* névoa de poeira: puffs macios e alongados (faixas) + grãos finos. [0]=sujo (marrom), [1]=limpo (azul-acinzentado) */
   var PUFF = [sprite(64, [[0, "rgba(150,92,40,1)"], [.45, "rgba(130,80,36,.5)"], [1, "rgba(100,60,25,0)"]]), sprite(64, [[0, "rgba(70,150,225,1)"], [.45, "rgba(60,130,210,.45)"], [1, "rgba(40,100,190,0)"]])];
@@ -430,7 +478,7 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
   }
   var acc = VENTS.map(function () { return { d: 0, s: 0 }; });
   function step(dt) {
-    t += dt; var rate = innerWidth < 700 ? .6 : 1;
+    t += dt; var rate = innerWidth < 700 ? .85 : 1;
     for (var vi = 0; vi < VENTS.length; vi++) { var a = acc[vi]; a.d += dt * 62 * rate; a.s += dt * 3 * rate; while (a.d >= 1) { a.d--; emit(VENTS[vi], 0); } while (a.s >= 1) { a.s--; emit(VENTS[vi], 1); } }
     for (var i = 0; i < N; i++) {
       if (!alive[i]) continue;
@@ -464,6 +512,8 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
     dirtEl.style.opacity = (1 - P).toFixed(3);     var t3 = smooth((P - .6) / .1), t1 = 1 - smooth((P - .2) / .12), t2 = smooth((P - .2) / .12) * (1 - smooth((P - .46) / .1));
     [t1, t2, t3].forEach(function (o, k) { var e = hsEl[k]; e.style.opacity = o.toFixed(3); e.style.visibility = o > .02 ? "visible" : "hidden"; e.style.pointerEvents = o > .5 ? "auto" : "none"; });
     shint.style.opacity = P < .04 ? 1 : 0;
+    /* o hero já tem o próprio botão de WhatsApp: no layout empilhado o flutuante só atrapalha enquanto ele está na tela */
+    if (fabEl) fabEl.classList.toggle("off", mqStack.matches && r.bottom > innerHeight * .55);
     var m = smooth(P), f = 1, rs = document.documentElement.style;
     function c3(a, b, q) { return "rgb(" + Math.round(lerp(a[0], b[0], q)) + "," + Math.round(lerp(a[1], b[1], q)) + "," + Math.round(lerp(a[2], b[2], q)) + ")"; }
     rs.setProperty("--blue", c3([232, 168, 88], [91, 182, 245], m));
