@@ -268,7 +268,8 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
 .fab.off{opacity:0;pointer-events:none;transform:scale(.8);animation:none}
 @media (max-width:700px),(orientation:portrait) and (max-width:1024px),(orientation:landscape) and (max-height:520px){
   .hero2 .hstick{display:flex;flex-direction:column;background:#f4f9fd}
-  .hmedia{position:relative;inset:auto;flex:1 1 0;min-height:30svh;overflow:hidden}
+  .hero2{height:270vh}
+  .hmedia{position:relative;inset:auto;flex:0 0 auto;height:clamp(230px,40svh,350px);overflow:hidden}
   .vig{background:linear-gradient(180deg,rgba(244,249,253,0) 58%,#f4f9fd 100%)}
   .shint{display:block;left:50%;right:auto;bottom:10px;font-size:11px;letter-spacing:.14em}
   .copy{position:relative;left:auto;right:auto;bottom:auto;flex:none;padding:14px var(--gutter) max(24px,env(safe-area-inset-bottom,0px))}
@@ -284,7 +285,7 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
 @media (max-height:720px) and (max-width:700px){ .hs .micro{display:none} .hs p{margin-top:10px} .hs .cta{margin-top:14px} }
 @media (orientation:landscape) and (max-height:520px){
   .hero2 .hstick{flex-direction:row;align-items:stretch}
-  .hmedia{flex:1.1 1 0;min-height:0}
+  .hmedia{flex:1.1 1 0;height:auto;min-height:0}
   .vig{background:linear-gradient(90deg,rgba(244,249,253,0) 62%,#f4f9fd 100%)}
   .copy{flex:1 1 0;align-self:center;padding:8px var(--gutter) 8px 8px}
   .hs h1,.hs h2{font-size:clamp(24px,4.4vw,38px)}
@@ -444,7 +445,7 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
   var dirtEl = document.getElementById("dirt"), cleanEl = document.getElementById("cleanl"), shint = document.getElementById("shint"), hsEl = [0, 1, 2].map(function (n) { return document.getElementById("hs" + n); });
   var IMW = 1687, IMH = 876;
   var VENTS = [{ x: 700, y: 324, r: 55, dx: -.2, dy: .85 }, { x: 855, y: 324, r: 55, dx: -.1, dy: .9 }, { x: 1010, y: 324, r: 55, dx: 0, dy: .9 }, { x: 1165, y: 324, r: 55, dx: .1, dy: .9 }, { x: 1310, y: 324, r: 55, dx: .2, dy: .85 }, { x: 1430, y: 324, r: 45, dx: .3, dy: .8 }];
-  var W = 0, H = 0, SC = 1, IS = 1, OX = 0, OY = 0, P = 0, t = 0;
+  var DA = 1, W = 0, H = 0, SC = 1, IS = 1, OX = 0, OY = 0, P = 0, t = 0;
   function lerp(a, b, q) { return a + (b - a) * q; }
   /* layout empilhado (celular / tablet em pé): foto em cima, texto embaixo */
   var mqStack = matchMedia("(max-width:700px),(orientation:portrait) and (max-width:1024px),(orientation:landscape) and (max-height:520px)");
@@ -457,7 +458,7 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
     var fx = .5, vw = W / IS;
     if (stacked && vw < IMW) fx = clamp((920 - vw / 2) / (IMW - vw), 0, 1);
     bgEl.style.objectPosition = fx === .5 ? "" : (fx * 100).toFixed(2) + "% 50%";
-    OX = (W - IMW * IS) * fx; OY = (H - IMH * IS) / 2; SC = clamp(IS, stacked ? .5 : .8, 1.7);
+    OX = (W - IMW * IS) * fx; OY = (H - IMH * IS) / 2; SC = clamp(IS, stacked ? .5 : .8, 1.7); DA = stacked ? .75 : 1;
   }
   resize(); addEventListener("resize", function () { resize(); apply(); if (reduce) still(); });
   (mqStack.addEventListener ? mqStack.addEventListener("change", function () { resize(); apply(); }) : mqStack.addListener(function () { resize(); apply(); }));
@@ -478,7 +479,7 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
   }
   var acc = VENTS.map(function () { return { d: 0, s: 0 }; });
   function step(dt) {
-    t += dt; var rate = innerWidth < 700 ? .85 : 1;
+    t += dt; var rate = innerWidth < 700 ? .6 : 1;
     for (var vi = 0; vi < VENTS.length; vi++) { var a = acc[vi]; a.d += dt * 62 * rate; a.s += dt * 3 * rate; while (a.d >= 1) { a.d--; emit(VENTS[vi], 0); } while (a.s >= 1) { a.s--; emit(VENTS[vi], 1); } }
     for (var i = 0; i < N; i++) {
       if (!alive[i]) continue;
@@ -501,7 +502,7 @@ footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(-
       if (kind[i]) { var s0 = size[i] * 2; ctx.setTransform(d, 0, 0, d, 0, 0); ctx.globalAlpha = .5 * env; ctx.drawImage(SPECK[c], px[i] - s0, py[i] - s0, s0 * 2, s0 * 2); }
       else {
         var g = .6 + q * 1.5, w = size[i] * g * .55, h = size[i] * g * 2.1, th = Math.atan2(-vx[i], vy[i]), co = Math.cos(th) * d, si = Math.sin(th) * d;
-        ctx.setTransform(co, si, -si, co, px[i] * d, py[i] * d); ctx.globalAlpha = (c ? .04 : .15) * env;
+        ctx.setTransform(co, si, -si, co, px[i] * d, py[i] * d); ctx.globalAlpha = (c ? .04 : .15) * DA * env;
         ctx.drawImage(PUFF[c], -w / 2, -h / 2, w, h);
       }
     }
