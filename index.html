@@ -1,0 +1,528 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Paulo Ar Auto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap">
+<style>
+/* Layout: preto total, títulos gigantes e leves, números vazados, blocos em formato de pílula, fluxo com linhas tracejadas. */
+:root {
+  --bg: #f4f9fd; --bg2: #ffffff; --bg3: #e6f2fc; --fg: #0b2238; --muted: #5d7185; --soft: #3a526a;
+  --line: rgba(11,34,56,.12); --line-strong: rgba(11,34,56,.26);
+  --blue: #5bb6f5; --blue-deep: #0b6fd0; --on-blue: #04202f; --focus: #0b6fd0;
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gutter: clamp(16px, 4vw, 48px);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-weight: 300; font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+p, h1, h2, h3 { margin: 0; }
+h1, h2, h3 { font-weight: 300; text-wrap: balance; letter-spacing: -.035em; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.wrap { max-width: 1280px; margin-inline: auto; padding-inline: var(--gutter); }
+section[id] { scroll-margin-top: 90px; }
+
+.btn { font: 500 15px/1 var(--font); border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 32px; border-radius: 999px; text-decoration: none; background: #fff; color: #000; transition: transform .35s var(--ease), background .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: scale(.98); }
+.btn-blue { background: var(--blue); color: var(--on-blue); }
+.btn-line { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px var(--line-strong); }
+.btn-sm { min-height: 44px; padding: 0 22px; font-size: 14px; }
+
+/* cabeçalho */
+.hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(0,0,0,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.hdr .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+.logo { text-decoration: none; font-weight: 600; font-size: 22px; letter-spacing: -.04em; display: inline-flex; align-items: center; gap: 10px; }
+.logo i { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 14px var(--blue); display: block; }
+.hdr nav { display: flex; gap: 8px 32px; font-size: 15px; }
+.hdr nav a { text-decoration: none; color: var(--soft); padding: 6px 0; }
+.hdr nav a:hover { color: #fff; }
+@media (max-width: 860px) { .hdr nav { display: none; } }
+
+/* hero */
+.hero-in { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 32px 48px; align-items: center; padding-block: 40px 96px; }
+.hero h1 { font-size: clamp(46px, 7.4vw, 100px); line-height: .98; }
+.hero .sub { margin-block: 28px 36px; font-size: clamp(18px, 2vw, 24px); line-height: 1.35; color: var(--soft); max-width: 24ch; }
+.cold { position: relative; width: 100%; max-width: 580px; justify-self: end; aspect-ratio: 591 / 637; background: #000; border-radius: 44px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
+.cold img { display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(.92) contrast(1.06); }
+.cold::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 26px 18px #000; background: linear-gradient(#000 0, transparent 7%, transparent 93%, #000 100%); }
+.cold canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; display: block; }
+.glass { position: absolute; z-index: 3; left: 16px; bottom: 16px; width: min(300px, calc(100% - 32px)); background: rgba(18,18,18,.62); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 0 0 1px var(--line-strong); border-radius: 28px; padding: 20px 22px; display: grid; gap: 10px; }
+.glass h3 { font-size: 22px; font-weight: 400; }
+.glass p { font-size: 14px; line-height: 1.45; color: var(--soft); }
+.glass .btn { justify-self: start; }
+@media (max-width: 860px) { .hero-in { grid-template-columns: minmax(0,1fr); padding-block: 24px 64px; } .cold { justify-self: center; } }
+
+.cold { touch-action: pan-y; cursor: crosshair; }
+.cold img { filter: brightness(.9) contrast(1.08) saturate(.82); }
+.cold .grade { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: multiply; background: linear-gradient(180deg, rgba(6,28,64,.78) 0%, rgba(6,28,64,.34) 36%, rgba(0,0,0,0) 64%); }
+.cold #frost { z-index: 2; mix-blend-mode: screen; }
+.cold #fx { z-index: 3; }
+.cold .glass { z-index: 5; }
+.cold .hint2 { position: absolute; z-index: 5; right: 16px; top: 16px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); background: rgba(0,0,0,.55); box-shadow: inset 0 0 0 1px var(--line-strong); border-radius: 999px; padding: 7px 14px; pointer-events: none; }
+.cold .hint2 .t { display: none; }
+@media (hover: none) { .cold .hint2 .m { display: none; } .cold .hint2 .t { display: inline; } }
+/* seções */
+.sec { border-top: 1px solid var(--line); padding-block: 96px 8px; }
+.top { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 24px 64px; align-items: end; margin-bottom: 56px; }
+.num { position: relative; display: block; font-size: clamp(56px, 8vw, 96px); line-height: 1; font-weight: 200; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.35); height: 1em; margin-bottom: 8px; }
+.num b { position: absolute; left: 0; top: .42em; font-size: 18px; font-weight: 600; letter-spacing: 0; color: #fff; -webkit-text-stroke: 0; }
+.top h2 { font-size: clamp(42px, 7.6vw, 108px); line-height: .96; }
+.top p { color: var(--soft); font-size: 18px; max-width: 46ch; justify-self: end; }
+@media (max-width: 860px) { .top { grid-template-columns: minmax(0,1fr); } .top p { justify-self: start; } .sec { padding-top: 72px; } }
+
+/* sinais */
+.cards4 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card { background: var(--bg2); border-radius: 32px; padding: 28px; display: grid; gap: 14px; align-content: start; box-shadow: inset 0 0 0 1px var(--line); min-width: 0; }
+.card .ic { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: #000; }
+.card h3 { font-size: 24px; font-weight: 400; line-height: 1.1; }
+.card p { font-size: 15px; color: var(--muted); line-height: 1.5; }
+
+/* percurso rolando a página */
+.scrolly { position: relative; height: 560vh; margin-top: 8px; }
+.sticky { position: sticky; top: 72px; height: calc(100svh - 72px); display: grid; align-content: center; padding-inline: var(--gutter); }
+.stagewrap { position: relative; width: min(100%, calc((100svh - 72px - 56px) * 16 / 9), 1280px); margin-inline: auto; }
+.box { position: relative; aspect-ratio: 16 / 9; border-radius: clamp(24px, 5vw, 56px); overflow: hidden; background: #000; box-shadow: 0 0 0 1px var(--line); isolation: isolate; }
+.vwrap { position: absolute; left: 50%; top: 50%; height: 76%; aspect-ratio: 3 / 2; transform: translate(-50%, -50%); z-index: 2; }
+.vwrap.m { z-index: 6; pointer-events: none; }
+.vwrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; display: block; background: #000;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent), linear-gradient(180deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent), linear-gradient(180deg, transparent, #000 7%, #000 93%, transparent); mask-composite: intersect; }
+.box .shade { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.45), transparent 26%), linear-gradient(0deg, rgba(0,0,0,.6), transparent 30%); }
+.box .cut { position: absolute; inset: 0; z-index: 4; background: #000; opacity: 0; pointer-events: none; }
+.marks { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.mk { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; opacity: 0; transition: opacity .4s var(--ease); }
+.mk.on { opacity: 1; }
+.mk .disc { position: absolute; inset: 6px; border-radius: 50%; background: var(--blue); color: var(--on-blue); display: grid; place-items: center; box-shadow: 0 0 0 2px #fff, 0 0 20px rgba(127,200,248,.7); }
+.mk .ring { position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.8); animation: ping 1.8s ease-out infinite; }
+@keyframes ping { from { transform: scale(.7); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
+.mk .lbl { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: 13px; font-weight: 500; padding: 5px 14px; border-radius: 999px; background: rgba(0,0,0,.72); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.mk::before { content: ""; position: absolute; left: 36px; top: 50%; width: 14px; height: 1px; background: rgba(255,255,255,.7); }
+.infos { position: absolute; inset: 0; z-index: 7; pointer-events: none; display: grid; }
+.info { grid-area: 1 / 1; position: relative; opacity: 0; }
+.info .t { position: absolute; left: 5%; top: 6%; font-size: clamp(26px, 5.4vw, 78px); line-height: .98; font-weight: 400; letter-spacing: -.04em; max-width: 46%; text-shadow: 0 2px 24px rgba(0,0,0,.6); }
+.info .facts { position: absolute; left: 5%; bottom: 6%; width: min(34%, 340px); display: grid; gap: 6px; }
+.info .facts h4 { margin: 0 0 6px; font-size: 18px; font-weight: 600; letter-spacing: -.02em; }
+.info .facts p { font-size: 14px; display: flex; gap: 12px; align-items: baseline; }
+.info .facts b { font-weight: 600; white-space: nowrap; }
+.info .facts span { color: var(--muted); }
+.info .d { position: absolute; right: 4%; bottom: 5%; width: min(36%, 380px); font-size: 14px; line-height: 1.5; color: var(--soft); background: rgba(14,14,14,.58); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: inset 0 0 0 1px var(--line-strong); border-radius: 24px; padding: 16px 20px; }
+.count { position: absolute; left: 14px; bottom: 18px; z-index: 8; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 14px; font-weight: 600; letter-spacing: .1em; }
+.count span { color: var(--muted); font-weight: 400; }
+.dots { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); z-index: 8; display: grid; gap: 10px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.6); transition: background .3s; }
+.dots i.on { background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+.hint { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 8; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); transition: opacity .4s; display: inline-flex; gap: 10px; align-items: center; }
+.hint svg { animation: nudge 1.6s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateY(5px); } }
+@media (max-width: 820px) {
+  .box { aspect-ratio: 3 / 2; }
+  .vwrap { height: 100%; }
+  .sticky { align-content: start; padding-top: 16px; }
+  .stagewrap { width: 100%; }
+  .infos { position: static; margin-top: 16px; min-height: 190px; pointer-events: auto; }
+  .info .t { position: static; max-width: none; font-size: 34px; margin-bottom: 10px; text-shadow: none; }
+  .info .facts { display: none; }
+  .info .d { position: static; width: auto; background: var(--bg2); }
+  .mk .lbl { display: none; }
+  .mk::before { display: none; }
+  .count { bottom: 12px; left: 10px; font-size: 11px; }
+}
+.scrolly.static { height: auto; }
+.scrolly.static .sticky { position: static; height: auto; }
+.scrolly.static .infos { position: static; display: grid; gap: 16px; margin-top: 16px; min-height: 0; }
+.scrolly.static .info { grid-area: auto; opacity: 1 !important; }
+.scrolly.static .info .t, .scrolly.static .info .d { position: static; max-width: none; width: auto; margin-bottom: 8px; }
+.scrolly.static .info .facts { display: none; }
+.scrolly.static .marks, .scrolly.static .hint, .scrolly.static .dots, .scrolly.static .count { display: none; }
+
+/* serviços */
+.svc-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.svc { border-radius: 40px; padding: 32px; min-height: 380px; display: grid; gap: 20px; align-content: space-between; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line); min-width: 0; }
+.svc .k { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; opacity: .6; margin-bottom: 14px; display: block; }
+.svc h3 { font-size: 40px; line-height: 1; font-weight: 300; }
+.svc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 16px; }
+.svc li::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); margin-right: 12px; }
+.svc.hi { background: #fff; color: #000; box-shadow: none; }
+.svc.hi li::before { background: var(--blue-deep); }
+.svc.hi .btn { background: #000; color: #fff; }
+.note { margin-top: 20px; color: var(--muted); font-size: 15px; }
+
+/* etapas */
+.flow { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; padding-bottom: 80px; }
+.flow svg.path { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.step { position: relative; z-index: 1; background: var(--bg2); border-radius: 28px; padding: 24px; display: grid; gap: 14px; min-height: 220px; align-content: space-between; box-shadow: inset 0 0 0 1px var(--line); min-width: 0; }
+.step:nth-child(odd) { margin-top: 0; } .step:nth-child(even) { margin-top: 80px; }
+.step .n { font-size: 14px; font-weight: 500; color: var(--blue); }
+.step h3 { font-size: 30px; line-height: 1; font-weight: 300; }
+.step p { font-size: 14px; color: var(--muted); line-height: 1.45; }
+@media (max-width: 900px) { .flow { grid-template-columns: minmax(0,1fr); padding-bottom: 0; } .flow svg.path { display: none; } .step:nth-child(even) { margin-top: 0; } .step { min-height: 0; } }
+
+/* dúvidas */
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; padding-block: 28px; font-size: clamp(22px, 3vw, 32px); font-weight: 300; letter-spacing: -.03em; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 44px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 36px; font-weight: 200; transition: transform .3s var(--ease); flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq p { padding-bottom: 28px; color: var(--soft); max-width: 62ch; }
+
+/* contato */
+.contact { margin-top: 96px; border-radius: clamp(32px, 6vw, 72px); background: var(--bg3); box-shadow: inset 0 0 0 1px var(--line); padding: clamp(24px, 5vw, 64px); display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 40px 64px; }
+.contact h2 { font-size: clamp(42px, 7vw, 92px); line-height: .96; }
+.contact h2 em { font-style: normal; color: var(--blue); }
+.contact .lead { margin-top: 24px; color: var(--soft); max-width: 36ch; font-size: 18px; }
+.phone { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 28px; }
+.phone code { font: 400 26px var(--font); letter-spacing: -.02em; background: #000; padding: 10px 22px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-strong); user-select: all; }
+.toast { font-size: 13px; color: var(--muted); min-height: 20px; margin-top: 12px; }
+.form { display: grid; gap: 16px; align-content: start; }
+.field { display: grid; gap: 8px; }
+.field label { font-size: 13px; font-weight: 500; color: var(--soft); }
+.field input, .field select { font: inherit; font-weight: 400; padding: 14px 22px; min-height: 56px; border-radius: 999px; border: 0; background: #000; color: #fff; box-shadow: inset 0 0 0 1px var(--line-strong); width: 100%; }
+.field input::placeholder { color: #6b6b6b; }
+.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.out { font-size: 14px; color: var(--soft); min-height: 22px; word-break: break-word; }
+.out a { color: var(--blue); font-weight: 500; }
+@media (max-width: 860px) { .contact { grid-template-columns: minmax(0,1fr); } }
+
+footer { margin-top: 64px; padding-block: 28px 44px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .tile, .hot .disc { transition: none; } }
+
+/* ===== novo hero: tela cheia, sujo -> limpo ao rolar ===== */
+.hero2{position:relative;height:340vh}
+.hstick{position:sticky;top:72px;height:calc(100svh - 72px);overflow:hidden;background:#050403}
+.hstick .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1.12) contrast(1.05) saturate(1.05)}
+.dirt{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(185,125,60,.5),rgba(120,70,30,.62));mix-blend-mode:multiply;pointer-events:none}
+.cleanl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,70,140,.55),rgba(10,40,90,.4) 60%,rgba(0,0,0,.1));mix-blend-mode:multiply;opacity:0;pointer-events:none}
+.hstick #fx{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
+.vig{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.2) 28%,transparent 48%),linear-gradient(90deg,rgba(0,0,0,.4),transparent 40%)}
+.copy{position:absolute;z-index:5;left:var(--gutter);right:var(--gutter);bottom:clamp(28px,6vh,56px);display:grid}
+.hs{grid-area:1/1;max-width:min(780px,100%);opacity:0;visibility:hidden}
+.hs h1,.hs h2{font-size:clamp(34px,4.6vw,66px);line-height:1;font-weight:400;text-shadow:0 2px 30px rgba(0,0,0,.6)}
+.hs p{margin-top:18px;font-size:clamp(17px,2vw,22px);color:var(--soft);max-width:34ch;text-shadow:0 1px 14px rgba(0,0,0,.7)}
+.hs .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.shint{position:absolute;z-index:5;right:var(--gutter);bottom:24px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+@media (max-width:700px){.shint{display:none}.hs h1,.hs h2{font-size:clamp(34px,10vw,48px)}}
+
+/* ===== tema claro (limpeza) ===== */
+.hdr{background:color-mix(in srgb,var(--bg) 80%,transparent);box-shadow:0 1px 0 var(--line)}
+.logo{color:var(--fg)}
+.hdr nav a:hover{color:var(--fg)}
+.btn{background:#0b2238;color:#fff}
+.btn-blue{background:var(--blue);color:var(--on-blue)}
+.btn-line{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-strong)}
+.card,.svc,.step,.contact{box-shadow:0 1px 0 var(--line),0 12px 32px rgba(20,70,120,.07),inset 0 0 0 1px var(--line)}
+.card .ic{background:#e3f1fd;color:#0b6fd0}
+.step .n,.contact h2 em{color:var(--blue-deep)}
+.svc li::before{background:var(--blue-deep)}
+.svc.hi{background:#0b2238;color:#fff;box-shadow:0 18px 40px rgba(11,34,56,.25)}
+.svc.hi li::before{background:var(--blue)}
+.svc.hi .btn{background:#fff;color:#0b2238}
+.num{-webkit-text-stroke:1px rgba(11,34,56,.3)}
+.num b{color:var(--fg)}
+.phone code{background:#fff;color:var(--fg)}
+.field input,.field select{background:#fff;color:var(--fg)}
+.field input::placeholder{color:#8aa0b4}
+.out a{color:var(--blue-deep)}
+.faq details[open] summary{color:var(--blue-deep)}
+/* palco do vídeo continua escuro (cinema) */
+.box{color:#fff;--fg:#fff;--soft:#c9c9c9;--muted:#9a9a9a;--line-strong:rgba(255,255,255,.3)}
+@media (min-width:821px){.infos{--fg:#fff;--soft:#c9c9c9;--muted:#9a9a9a;--line-strong:rgba(255,255,255,.3);color:#fff}}
+.scrolly.static .infos{--fg:#0b2238;--soft:#3a526a;--muted:#5d7185;color:#0b2238}
+/* hero: película clara que "limpa" a foto */
+.hero2 .hstick{background:#050403}
+.cleanl{background:linear-gradient(90deg,rgba(244,249,253,.93),rgba(244,249,253,.55) 52%,rgba(214,234,251,.45));mix-blend-mode:normal}
+.vig{opacity:var(--vo,1)}
+.hs .btn-blue{box-shadow:0 8px 24px rgba(31,143,232,.35)}
+
+.logo img{height:56px;width:auto;display:block;padding:3px 12px;border-radius:999px;background:rgba(255,255,255,var(--vo,1))}
+.flogo{display:inline-flex;align-items:center;gap:14px}.flogo img{height:64px;width:auto}
+@media (max-width:480px){.logo img{height:48px}}
+</style>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#topo" aria-label="Paulo Ar Auto, início"><img src="logo-pdl.png" alt="PDL Ar Auto" width="90" height="56"></a>
+    <nav aria-label="Navegação principal"><a href="#sinais">Sinais</a><a href="#onde">Onde limpamos</a><a href="#servicos">Serviços</a><a href="#etapas">Como funciona</a><a href="#duvidas">Dúvidas</a><a href="#contato">Contato</a></nav>
+    <a class="btn btn-blue btn-sm" href="https://wa.me/5516997877281" target="_blank" rel="noopener">Agendar</a>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero2" id="hero" aria-label="Início">
+    <div class="hstick" id="hstick">
+      <img class="bg" src="interior.jpg" width="1200" height="800" alt="Interior de um carro com painel escuro e saídas de ar">
+      <div class="dirt" id="dirt" aria-hidden="true"></div>
+      <div class="cleanl" id="cleanl" aria-hidden="true"></div>
+      <canvas id="fx" aria-hidden="true"></canvas>
+      <div class="vig" aria-hidden="true"></div>
+      <div class="copy">
+        <div class="hs" id="hs0"><h1 id="h1">Você respira o que está dentro dele.</h1><p>Todo dia, na ida e na volta.</p></div>
+        <div class="hs" id="hs1"><h2>O cheiro não vem do filtro.</h2><p>Ele nasce no evaporador e nos dutos, onde quase ninguém chega.</p></div>
+        <div class="hs" id="hs2"><h2>Aí o ar volta a ser só ar.</h2><p>Limpeza de ar-condicionado automotivo, feita por dentro.</p><div class="cta"><a class="btn btn-blue" href="https://wa.me/5516997877281" target="_blank" rel="noopener">Agendar no WhatsApp</a><a class="btn btn-line" href="#servicos">Ver serviços</a></div></div>
+      </div>
+      <div class="shint" id="shint" aria-hidden="true">Role a página</div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="sec" id="sinais" aria-labelledby="t-sinais">
+      <div class="top">
+        <div><span class="num" aria-hidden="true">01<b>Sinais</b></span><h2 id="t-sinais">Seu ar pede limpeza?</h2></div>
+        <p>O mofo se acumula no evaporador e nos dutos, onde você não vê. Se algum destes sinais aparece, vale limpar.</p>
+      </div>
+      <div class="cards4">
+        <div class="card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.5 4.5 6 7 6 10.5a6 6 0 0 1-12 0C6 10 8.5 7.5 12 3z"/></svg></span><h3>Cheiro de mofo</h3><p>Odor azedo ao ligar, principalmente nos primeiros minutos.</p></div>
+        <div class="card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h11a3 3 0 1 0-3-3M3 14h15a3 3 0 1 1-3 3M3 19h8"/></svg></span><h3>Ar fraco</h3><p>Filtro entupido reduz o fluxo que chega até você, mesmo no máximo.</p></div>
+        <div class="card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="8" r="1.4"/><circle cx="12" cy="5" r="1.4"/><circle cx="18" cy="9" r="1.4"/><circle cx="9" cy="14" r="1.4"/><circle cx="16" cy="16" r="1.4"/><circle cx="12" cy="20" r="1.4"/></svg></span><h3>Espirros</h3><p>Poeira e mofo soltos pelas saídas incomodam quem tem alergia.</p></div>
+        <div class="card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 8v6l-4-2v-4z"/></svg></span><h3>Filtro antigo</h3><p>O filtro de cabine segura a sujeira do ar e precisa ser trocado de tempos em tempos.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="onde" aria-labelledby="t-onde">
+      <div class="top">
+        <div><span class="num" aria-hidden="true">02<b>Onde limpamos</b></span><h2 id="t-onde">A sujeira que você não vê</h2></div>
+        <p>Role a página. O carro se move até cada parte do ar-condicionado e o "+" mostra exatamente onde ela fica.</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="scrolly" id="tour" aria-label="Partes do ar-condicionado, conforme você rola a página">
+    <div class="sticky" id="sticky">
+      <div class="stagewrap">
+        <div class="box" id="stage">
+          <div class="vwrap"><video id="tourVid" src="scrub.mp4" poster="scrub-poster.jpg" muted playsinline preload="auto" aria-label="Carro preto girando, com o vídeo avançando conforme a rolagem"></video></div>
+          <div class="shade"></div>
+          <div class="lines" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="cut" id="cut"></div>
+          <div class="vwrap m"><div class="marks" id="marks"></div></div>
+          <div class="count" aria-hidden="true"><b id="cnt">01</b><span>/04</span></div>
+          <div class="dots" id="dots" aria-hidden="true"></div>
+          <div class="hint" id="hint" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v10M3 8l4 4 4-4"/></svg>Role a página</div>
+        </div>
+        <div class="infos" id="infos" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <section class="sec" id="servicos" aria-labelledby="t-serv">
+      <div class="top">
+        <div><span class="num" aria-hidden="true">03<b>Serviços</b></span><h2 id="t-serv">Escolha o serviço</h2></div>
+        <p>Cada carro é diferente. O Paulo confirma o que o seu precisa e combina valor e prazo antes de começar.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc"><div><span class="k">Para começar</span><h3>Higienização</h3></div><ul><li>Limpeza do evaporador</li><li>Limpeza dos dutos de ar</li><li>Produto de uso automotivo</li></ul><a class="btn btn-line" href="https://wa.me/5516997877281" target="_blank" rel="noopener">Pedir orçamento</a></div>
+        <div class="svc hi"><div><span class="k">Mais pedido</span><h3>Higienização + filtro</h3></div><ul><li>Tudo da higienização</li><li>Troca do filtro de cabine</li><li>Ar mais limpo por mais tempo</li></ul><a class="btn" href="https://wa.me/5516997877281" target="_blank" rel="noopener">Pedir orçamento</a></div>
+        <div class="svc"><div><span class="k">Completo</span><h3>Limpeza completa</h3></div><ul><li>Higienização e filtro</li><li>Verificação do compressor</li><li>Teste de temperatura</li></ul><a class="btn btn-line" href="https://wa.me/5516997877281" target="_blank" rel="noopener">Pedir orçamento</a></div>
+      </div>
+      <p class="note">Valores e prazos são combinados direto com o Paulo, pelo WhatsApp.</p>
+    </section>
+
+    <section class="sec" id="etapas" aria-labelledby="t-et">
+      <div class="top">
+        <div><span class="num" aria-hidden="true">04<b>Como funciona</b></span><h2 id="t-et">Quatro etapas</h2></div>
+        <p>Do diagnóstico ao teste final, o serviço segue sempre a mesma ordem.</p>
+      </div>
+      <div class="flow">
+        <svg class="path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="12.5,30 37.5,72 62.5,30 87.5,72" fill="none" stroke="rgba(11,34,56,.3)" stroke-width="1.2" stroke-dasharray="6 6" vector-effect="non-scaling-stroke"/></svg>
+        <div class="step"><span class="n">Etapa 1</span><h3>Inspeção</h3><p>Verificamos o filtro, as saídas de ar e o cheiro ao ligar.</p></div>
+        <div class="step"><span class="n">Etapa 2</span><h3>Limpeza do evaporador</h3><p>Aplicamos o produto e limpamos os dutos até as saídas.</p></div>
+        <div class="step"><span class="n">Etapa 3</span><h3>Troca do filtro</h3><p>Colocamos um filtro de cabine novo, quando o serviço inclui.</p></div>
+        <div class="step"><span class="n">Etapa 4</span><h3>Teste final</h3><p>Medimos a saída de ar frio e entregamos o carro.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="duvidas" aria-labelledby="t-d">
+      <div class="top">
+        <div><span class="num" aria-hidden="true">05<b>Dúvidas</b></span><h2 id="t-d">Perguntas comuns</h2></div>
+      </div>
+      <div class="faq">
+        <details><summary>Quanto tempo leva o serviço?</summary><p>Depende do carro e do serviço escolhido. O Paulo confirma o prazo ao agendar.</p></details>
+        <details><summary>Quando devo fazer a limpeza?</summary><p>Em geral uma vez por ano, ou sempre que aparecer cheiro de mofo ou o ar ficar fraco. O Paulo orienta pelo estado do seu carro.</p></details>
+        <details><summary>Preciso trocar o filtro de cabine?</summary><p>Se o filtro estiver sujo, sim. Ele segura a poeira antes do ar chegar a você. Na inspeção o Paulo mostra o estado dele.</p></details>
+        <details><summary>Como sei o valor?</summary><p>Mande uma mensagem no WhatsApp com o modelo e o ano do carro. O Paulo responde com o valor e o prazo.</p></details>
+      </div>
+    </section>
+
+    <section class="contact" id="contato" aria-labelledby="t-c">
+      <div>
+        <h2 id="t-c">Ar frio <em>sem cheiro</em></h2>
+        <p class="lead">Fale direto com o Paulo. Conte o modelo do carro e o que está acontecendo com o ar-condicionado.</p>
+        <div class="phone"><code>16 99787-7281</code><button class="btn btn-line btn-sm" type="button" id="copy">Copiar número</button></div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+      <form class="form" id="form" novalidate>
+        <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" autocomplete="name" placeholder="Ex.: Carlos Silva"></div>
+        <div class="field"><label for="f-modelo">Modelo e ano do carro</label><input id="f-modelo" placeholder="Ex.: Onix 2019"></div>
+        <div class="field"><label for="f-serv">Serviço</label><select id="f-serv"><option>Higienização</option><option>Higienização + filtro</option><option>Limpeza completa</option><option>Não sei, quero orientação</option></select></div>
+        <button class="btn btn-blue" type="submit">Preparar mensagem</button>
+        <div class="out" id="out" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <footer><span class="flogo"><img src="logo-pdl.png" alt="PDL" width="104" height="65">Paulo Ar Auto · Limpeza de ar-condicionado automotivo</span><span>WhatsApp 16 99787-7281</span></footer>
+  </div>
+</main>
+
+<script>
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+  function smooth(x) { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+
+  /* ---------- home: partículas saindo das saídas de ar; sujo -> limpo ao rolar ---------- */
+  var hero = document.getElementById("hero"), hst = document.getElementById("hstick"), cv = document.getElementById("fx"), ctx = cv.getContext("2d");
+  var dirtEl = document.getElementById("dirt"), cleanEl = document.getElementById("cleanl"), shint = document.getElementById("shint"), hsEl = [0, 1, 2].map(function (n) { return document.getElementById("hs" + n); });
+  var IMW = 1200, IMH = 800;
+  var VENTS = [{ x: 147, y: 292, r: 30, dx: .5, dy: .5 }, { x: 500, y: 287, r: 34, dx: -.25, dy: .8 }, { x: 728, y: 287, r: 34, dx: .25, dy: .8 }, { x: 1030, y: 290, r: 32, dx: -.5, dy: .6 }];
+  var W = 0, H = 0, SC = 1, IS = 1, OX = 0, OY = 0, P = 0, t = 0;
+  function lerp(a, b, q) { return a + (b - a) * q; }
+  function resize() {
+    var d = Math.min(window.devicePixelRatio || 1, 2); W = hst.clientWidth; H = hst.clientHeight;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d); ctx.setTransform(d, 0, 0, d, 0, 0);
+    IS = Math.max(W / IMW, H / IMH); OX = (W - IMW * IS) / 2; OY = (H - IMH * IS) / 2; SC = clamp(IS, .8, 1.7);
+  }
+  resize(); addEventListener("resize", function () { resize(); apply(); if (reduce) still(); });
+  function sprite(sz, stops) { var c = document.createElement("canvas"); c.width = c.height = sz; var g = c.getContext("2d"), r = sz / 2, gr = g.createRadialGradient(r, r, 0, r, r, r); stops.forEach(function (q) { gr.addColorStop(q[0], q[1]); }); g.fillStyle = gr; g.fillRect(0, 0, sz, sz); return c; }
+  /* névoa de poeira: puffs macios e alongados (faixas) + grãos finos. [0]=sujo (marrom), [1]=limpo (azul-acinzentado) */
+  var PUFF = [sprite(64, [[0, "rgba(206,134,72,1)"], [.45, "rgba(176,110,58,.5)"], [1, "rgba(130,80,40,0)"]]), sprite(64, [[0, "rgba(70,150,225,1)"], [.45, "rgba(60,130,210,.45)"], [1, "rgba(40,100,190,0)"]])];
+  var SPECK = [sprite(16, [[0, "rgba(255,210,150,1)"], [.5, "rgba(200,140,80,.5)"], [1, "rgba(160,100,50,0)"]]), sprite(16, [[0, "rgba(30,120,220,1)"], [.5, "rgba(50,140,230,.5)"], [1, "rgba(60,150,240,0)"]])];
+  var N = innerWidth < 700 ? 1100 : 2400;
+  var px = new Float32Array(N), py = new Float32Array(N), vx = new Float32Array(N), vy = new Float32Array(N), ox = new Float32Array(N), age = new Float32Array(N), life = new Float32Array(N), size = new Float32Array(N), mix = new Float32Array(N), sd = new Float32Array(N), kind = new Uint8Array(N), alive = new Uint8Array(N), cursor = 0;
+  function alloc() { for (var n = 0; n < N; n++) { cursor = (cursor + 1) % N; if (!alive[cursor]) return cursor; } return -1; }
+  function emit(v, k) {
+    var cx = OX + v.x * IS, cy = OY + v.y * IS; if (cx < -60 || cx > W + 60) return;
+    var i = alloc(); if (i < 0) return;
+    px[i] = cx + rnd(-1, 1) * v.r * IS * .9; ox[i] = px[i]; py[i] = cy + rnd(0, .5) * v.r * IS * .4;
+    vx[i] = v.dx * 50 * SC + rnd(-25, 25) * SC; vy[i] = (k ? rnd(70, 150) : rnd(130, 260)) * SC;
+    age[i] = 0; kind[i] = k; alive[i] = 1; mix[i] = Math.random(); sd[i] = rnd(-1, 1);
+    if (k) { life[i] = rnd(3, 6); size[i] = rnd(.5, 1.1) * SC; } else { life[i] = rnd(3.6, 5.8); size[i] = rnd(70, 150) * SC; }
+  }
+  var acc = VENTS.map(function () { return { d: 0, s: 0 }; });
+  function step(dt) {
+    t += dt; var rate = innerWidth < 700 ? .6 : 1;
+    for (var vi = 0; vi < VENTS.length; vi++) { var a = acc[vi]; a.d += dt * 105 * rate; a.s += dt * 4 * rate; while (a.d >= 1) { a.d--; emit(VENTS[vi], 0); } while (a.s >= 1) { a.s--; emit(VENTS[vi], 1); } }
+    for (var i = 0; i < N; i++) {
+      if (!alive[i]) continue;
+      age[i] += dt; if (age[i] >= life[i]) { alive[i] = 0; continue; }
+      var x = px[i], y = py[i], k = kind[i], q = age[i] / life[i];
+      /* o cone abre com a distância; cada faixa tem sua própria deriva lateral */
+      var ax = (x - ox[i]) * .9 + Math.sin(y * .007 + t * .8 + sd[i] * 6) * 38 * SC + sd[i] * 30 * SC;
+      var ay = (k ? 6 : 30) * SC + Math.cos(x * .006 + t * .6 + sd[i] * 4) * 14 * SC;
+      var dm = Math.exp(-(k ? .35 : .55) * dt), X = (vx[i] + ax * dt) * dm, Y = (vy[i] + ay * dt) * dm;
+      vx[i] = X; vy[i] = Y; px[i] = x + X * dt; py[i] = y + Y * dt;
+      if (py[i] > H + 220 || px[i] < -220 || px[i] > W + 220) alive[i] = 0;
+    }
+  }
+  function render() {
+    ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = "source-over";
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    for (var i = 0; i < N; i++) {
+      if (!alive[i]) continue;
+      var q = age[i] / life[i], env = Math.sin(Math.PI * Math.min(1, q)), c = mix[i] < P ? 1 : 0;
+      if (kind[i]) { var s0 = size[i] * 2; ctx.setTransform(d, 0, 0, d, 0, 0); ctx.globalAlpha = .5 * env; ctx.drawImage(SPECK[c], px[i] - s0, py[i] - s0, s0 * 2, s0 * 2); }
+      else {
+        var g = .6 + q * 1.5, w = size[i] * g * .55, h = size[i] * g * 2.1, th = Math.atan2(-vx[i], vy[i]), co = Math.cos(th) * d, si = Math.sin(th) * d;
+        ctx.setTransform(co, si, -si, co, px[i] * d, py[i] * d); ctx.globalAlpha = (c ? .026 : .11) * env;
+        ctx.drawImage(PUFF[c], -w / 2, -h / 2, w, h);
+      }
+    }
+    ctx.setTransform(d, 0, 0, d, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  }
+  function apply() {
+    var r = hero.getBoundingClientRect(), dist = Math.max(1, hero.offsetHeight - hst.offsetHeight); P = clamp((72 - r.top) / dist, 0, 1);
+    dirtEl.style.opacity = (1 - P).toFixed(3);     var t3 = smooth((P - .6) / .1), t1 = 1 - smooth((P - .2) / .12), t2 = smooth((P - .2) / .12) * (1 - smooth((P - .46) / .1));
+    [t1, t2, t3].forEach(function (o, k) { var e = hsEl[k]; e.style.opacity = o.toFixed(3); e.style.visibility = o > .02 ? "visible" : "hidden"; e.style.pointerEvents = o > .5 ? "auto" : "none"; });
+    shint.style.opacity = P < .04 ? 1 : 0;
+    var m = smooth(P), f = smooth((P - .54) / .08), rs = document.documentElement.style;
+    function c3(a, b, q) { return "rgb(" + Math.round(lerp(a[0], b[0], q)) + "," + Math.round(lerp(a[1], b[1], q)) + "," + Math.round(lerp(a[2], b[2], q)) + ")"; }
+    rs.setProperty("--blue", c3([232, 168, 88], [91, 182, 245], m));
+    rs.setProperty("--bg", c3([14, 9, 4], [244, 249, 253], f));
+    rs.setProperty("--fg", c3([255, 255, 255], [11, 34, 56], f));
+    rs.setProperty("--soft", c3([226, 214, 200], [58, 82, 106], f));
+    rs.setProperty("--vo", (1 - f).toFixed(3));
+    cleanEl.style.opacity = smooth((P - .5) / .15).toFixed(3);
+  }
+  var running = !reduce, last = 0;
+  function frame(now) { if (!running) return; if (!last) last = now; var dt = Math.min(.033, (now - last) / 1000); last = now; apply(); step(dt); render(); requestAnimationFrame(frame); }
+  function still() { for (var n = 0; n < N; n++) alive[n] = 0; for (var s = 0; s < 160; s++) step(.025); render(); }
+  apply();
+  if (reduce) { still(); addEventListener("scroll", function () { apply(); render(); }, { passive: true }); }
+  else { for (var w0 = 0; w0 < 200; w0++) step(.025); requestAnimationFrame(frame); }
+  if (!reduce && "IntersectionObserver" in window) {
+    var vis = true, tab = true;
+    var sync = function () { var go = vis && tab; if (go && !running) { running = true; last = 0; requestAnimationFrame(frame); } else if (!go) running = false; };
+    new IntersectionObserver(function (e) { vis = e[0].isIntersecting; sync(); }).observe(hst);
+    document.addEventListener("visibilitychange", function () { tab = !document.hidden; sync(); });
+  }
+
+  /* ---------- percurso: o vídeo anda conforme a rolagem ---------- */
+  var SEG = [[.05, 1.15], [1.15, 2.6], [2.6, 4.75], [4.75, 5.75]];
+  var STEPS = [
+    { name: "Compressor", marks: [{ x: .40, y: .36, l: "Compressor" }], facts: [["Onde fica", "Sob o capô, junto ao motor"], ["O que faz", "Comprime o gás"], ["No serviço", "Verificação"]], text: "Bombeia o gás que gela o ar. O Paulo confere ruído, correia e se o sistema gela normalmente antes de finalizar." },
+    { name: "Evaporador", marks: [{ x: .33, y: .34, l: "Evaporador" }], facts: [["Onde fica", "Atrás do painel"], ["Problema comum", "Mofo e bactérias"], ["No serviço", "Limpeza principal"]], text: "Fica úmido e escuro, por isso junta mofo e bactérias. É a principal fonte do cheiro ruim e recebe a limpeza principal." },
+    { name: "Dutos de ar", marks: [{ x: .57, y: .33, l: "Dutos e saídas" }], facts: [["Onde ficam", "Painel e console"], ["Problema comum", "Odor acumulado"], ["No serviço", "Higienização"]], text: "Levam o ar até as saídas. O produto passa por eles para tirar o odor que fica depois da limpeza do evaporador." },
+    { name: "Filtro de cabine", marks: [{ x: .66, y: .36, l: "Filtro de cabine" }], facts: [["Onde fica", "Sob o para-brisa ou atrás do porta-luvas"], ["O que faz", "Segura poeira e pólen"], ["No serviço", "Troca"]], text: "Segura poeira e pólen antes do ar chegar a você. Com o tempo entope e reduz o fluxo. O lugar exato varia conforme o modelo." }
+  ];
+  var sec = document.getElementById("tour"), sticky = document.getElementById("sticky"), tv = document.getElementById("tourVid");
+  var marksEl = document.getElementById("marks"), infosEl = document.getElementById("infos"), dotsEl = document.getElementById("dots"), cut = document.getElementById("cut"), cnt = document.getElementById("cnt"), hint = document.getElementById("hint");
+  var infoEls = [], markEls = [], dotEls = [];
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  STEPS.forEach(function (s, i) {
+    var info = el("div", "info"); info.appendChild(el("div", "t", s.name));
+    var f = el("div", "facts", "<h4>Em poucas palavras</h4>"); s.facts.forEach(function (r) { f.appendChild(el("p", "", "<b>" + r[0] + "</b><span>" + r[1] + "</span>")); }); info.appendChild(f);
+    info.appendChild(el("div", "d", s.text)); infosEl.appendChild(info); infoEls.push(info);
+    var ms = []; s.marks.forEach(function (m) { var e = el("div", "mk", '<span class="ring"></span><span class="disc"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M7 2v10M2 7h10"/></svg></span><span class="lbl">' + m.l + '</span>'); e.style.left = (m.x * 100) + "%"; e.style.top = (m.y * 100) + "%"; marksEl.appendChild(e); ms.push(e); }); markEls.push(ms);
+    var d = el("i"); dotsEl.appendChild(d); dotEls.push(d);
+  });
+
+  if (reduce) { sec.classList.add("static"); tv.preload = "metadata"; }
+  else {
+    var cur = 0, started = false, vis2 = false, lastSet = -1, lastAt = 0;
+    var unlock = function () { try { var p = tv.play(); if (p && p.then) p.then(function () { tv.pause(); }).catch(function () {}); } catch (e) {} removeEventListener("touchstart", unlock); removeEventListener("pointerdown", unlock); };
+    addEventListener("touchstart", unlock, { passive: true }); addEventListener("pointerdown", unlock, { passive: true });
+    function tick() {
+      if (!vis2) return;
+      var rect = sec.getBoundingClientRect(), top = 72, dist = sec.offsetHeight - sticky.offsetHeight;
+      var p = clamp((top - rect.top) / dist, 0, 1), s = p * STEPS.length, i = Math.min(STEPS.length - 1, Math.floor(s)), u = s - i;
+      if (p >= 1) { i = STEPS.length - 1; u = 1; }
+      var m = smooth(u / .45), target = SEG[i][0] + (SEG[i][1] - SEG[i][0]) * m;
+      cur = started ? cur + (target - cur) * .22 : target; started = true;
+      if (Math.abs(cur - lastSet) > .012 && (!tv.seeking || performance.now() - lastAt > 90)) { try { tv.currentTime = cur; } catch (e) {} lastSet = cur; lastAt = performance.now(); }
+      var last = i === STEPS.length - 1;
+      var inn = clamp((u - .28) / .2, 0, 1), out = last ? 1 : clamp((.95 - u) / .07, 0, 1), op = Math.min(inn, out);
+      var fade = 0;
+      cut.style.opacity = fade.toFixed(3);
+      infoEls.forEach(function (e, k) { e.style.opacity = k === i ? op.toFixed(3) : 0; e.style.visibility = k === i ? "visible" : "hidden"; });
+      markEls.forEach(function (ms, k) { var on = k === i && u > .42 && (last || u < .93); ms.forEach(function (e) { e.classList.toggle("on", on); }); });
+      dotEls.forEach(function (d, k) { d.classList.toggle("on", k === i && p > .01); });
+      cnt.textContent = "0" + (i + 1);
+      hint.style.opacity = p < .03 ? 1 : 0;
+      requestAnimationFrame(tick);
+    }
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { var was = vis2; vis2 = e[0].isIntersecting; if (vis2 && !was) requestAnimationFrame(tick); }, { rootMargin: "20% 0px" }).observe(sec);
+    else { vis2 = true; requestAnimationFrame(tick); }
+  }
+
+  /* ---------- contato ---------- */
+  var toast = document.getElementById("toast");
+  document.getElementById("copy").addEventListener("click", function () {
+    function ok() { toast.textContent = "Número copiado."; } function fail() { toast.textContent = "Não foi possível copiar. Selecione o número e copie."; }
+    try { navigator.clipboard.writeText("16 99787-7281").then(ok, fail); } catch (e) { fail(); }
+  });
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var n = document.getElementById("f-nome").value.trim() || "(seu nome)", m = document.getElementById("f-modelo").value.trim() || "(modelo e ano)", s = document.getElementById("f-serv").value;
+    var msg = "Olá Paulo, sou " + n + ". Quero agendar: " + s + ". Meu carro é " + m + ".";
+    var out = document.getElementById("out"); out.textContent = "";
+    var a = document.createElement("a"); a.href = "https://wa.me/5516997877281?text=" + encodeURIComponent(msg); a.target = "_blank"; a.rel = "noopener"; a.textContent = "Abrir WhatsApp com a mensagem";
+    var p = document.createElement("span"); p.textContent = msg + " "; out.appendChild(p); out.appendChild(a);
+  });
+})();
+</script>
+
+</body></html>
